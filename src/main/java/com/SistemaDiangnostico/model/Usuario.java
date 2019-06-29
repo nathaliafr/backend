@@ -17,41 +17,17 @@ public class Usuario {
 
 	@Id
 	private Long id;
-	
-	@Column
 	private String documento;
-	
-	@Column
 	private String nome;
-	
-	@Column
 	private Date dataNascimento;
-	
-	@Column
 	private String email;
-	
-	@Column
 	private String nacionalidade;
-	
-	@Column
 	private String endereco;
-	
-	@Column
 	private String bairro;
-	
-	@Column
 	private int cep;
-	
-	@Column
 	private String uf;
-	
-	@Column
 	private String cidade;
-	
-	@Column
 	private String complememto;
-	
-	@Column
 	private int numero;
 	
 	@ManyToMany

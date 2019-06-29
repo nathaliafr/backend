@@ -18,14 +18,13 @@ public class Menu {
 	
 	@Id
 	private Long id;
-	@Column
 	private String tipo;
 	
 	@ManyToMany
 	@JoinTable(name="menu_has_funcionalidade", joinColumns = {
 			@JoinColumn(name="menu_id")}, inverseJoinColumns = {
 					@JoinColumn(name="funcionalidade_id")})
-	private List funcionalidade;
+	private List<Funcionalidade> funcionalidade;
 	
 	public Long getId() {
 		return id;
@@ -39,11 +38,12 @@ public class Menu {
 	public void setTipo(String tipo) {
 		this.tipo = tipo;
 	}
-	public List getFuncionalidade() {
+	public List<Funcionalidade> getFuncionalidade() {
 		return funcionalidade;
 	}
-	public void setFuncionalidade(List funcionalidade) {
+	public void setFuncionalidade(List<Funcionalidade> funcionalidade) {
 		this.funcionalidade = funcionalidade;
 	}
+
 
 }
