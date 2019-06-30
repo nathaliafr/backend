@@ -10,9 +10,8 @@ import com.SistemaDiangnostico.repositorio.UsuarioRepositorio;
 
 @Service
 public class UsuarioService {
-	
 	@Autowired
-	private UsuarioRepositorio usuarioRepositorio;
+ 	private UsuarioRepositorio usuarioRepositorio;
 
 	public Usuario buscarUsuarioPorId(Long id){
 		return usuarioRepositorio.findById(id).get();
