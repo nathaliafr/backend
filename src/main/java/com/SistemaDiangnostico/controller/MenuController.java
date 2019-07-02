@@ -13,43 +13,42 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.SistemaDiangnostico.model.Usuario;
-import com.SistemaDiangnostico.service.UsuarioService;
-
+import com.SistemaDiangnostico.model.Menu;
+import com.SistemaDiangnostico.service.MenuService;
 
 @Controller
-@RequestMapping ("/usuario")
-public class UsuarioController {
-	
+@RequestMapping ("/menu")
+public class MenuController {
+
 	@Autowired
-	UsuarioService usuarioService;
+	MenuService menuService;
 	
 	@GetMapping ("/{id}")
-	public @ResponseBody Usuario getUsuarioPorId (@PathVariable Long id) {
-		return usuarioService.buscarUsuarioPorId(id);
+	public @ResponseBody Menu getMenuPorId (@PathVariable Long id) {
+		return menuService.buscarMenuPorId(id);
 	}
 	
 	@GetMapping("/")
-	public @ResponseBody List<Usuario> getTodosUsuario () {
+	public @ResponseBody List<Menu> getTodosMenu () {
 		
-		List<Usuario> buscarTodosUsuario = usuarioService.buscarTodosUsuario();
+		List<Menu> buscarTodosMenu = menuService.buscarTodosMenu();
 		 
-		return buscarTodosUsuario;
+		return buscarTodosMenu;
 	}
 	
 	@DeleteMapping ("/{id}")
-	public @ResponseBody boolean deleteUsuario(@PathVariable Long id) {
-		usuarioService.deletarUsuario(id);
+	public @ResponseBody boolean deletarMenu(@PathVariable Long id) {
+		menuService.deletarMenu(id);
 		return true;
 	}
 	
 	@PostMapping
-	public @ResponseBody Usuario editarUsuario(@RequestBody Usuario usuario) {
-		return usuarioService.editarUsuario(usuario.getId(), usuario);
+	public @ResponseBody Menu editarMenu(@RequestBody Menu menu) {
+		return menuService.editarMenu(menu.getId(), menu);
 	}
 	
 	@PutMapping
-	public @ResponseBody Usuario criarUsuario(@RequestBody Usuario usuario) {
-		return usuarioService.criarUsuario(usuario);
+	public @ResponseBody Menu criarMenu(@RequestBody Menu menu) {
+		return menuService.criarMenu(menu);
 	}
 }

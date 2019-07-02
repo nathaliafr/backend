@@ -24,6 +24,7 @@ public class Usuario {
 	private String cidade;
 	private String complememto;
 	private Long numero;
+	
 	public Long getId() {
 		return id;
 	}
