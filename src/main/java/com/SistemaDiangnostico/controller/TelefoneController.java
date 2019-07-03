@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.SistemaDiangnostico.model.Telefone;
 import com.SistemaDiangnostico.service.TelefoneService;
-import com.SistemaDiangnostico.service.UsuarioService;
 
 @Controller
 @RequestMapping ("/telefone")
@@ -43,7 +42,7 @@ public class TelefoneController {
 	
 	@PostMapping
 	public @ResponseBody Telefone editarTelefone(@RequestBody Telefone telefone) {
-		return telefoneService.editarTelefone(telefone.getId(), telefone);
+		return telefoneService.editarTelefone(telefone.getIdTelefone(), telefone);
 	}
 	
 	@PutMapping

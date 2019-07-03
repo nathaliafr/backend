@@ -1,9 +1,12 @@
 package com.SistemaDiangnostico.model;
 
  import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -11,7 +14,7 @@ import javax.persistence.Table;
 public class Usuario {
 
 	@Id
-	private Long id;
+	private Long idUsuario;
 	private String documento;
 	private String nome;
 	private Date dataNascimento;
@@ -24,13 +27,12 @@ public class Usuario {
 	private String cidade;
 	private String complememto;
 	private Long numero;
+
+	@OneToMany
+    @JoinColumn(name="idTelefone")
+	private List<Telefone> telefones;
 	
-	public Long getId() {
-		return id;
-	}
-	public void setId(Long id) {
-		this.id = id;
-	}
+	
 	public String getDocumento() {
 		return documento;
 	}
@@ -104,6 +106,18 @@ public class Usuario {
 		this.numero = numero;
 	}
 	 
-	 
+	
+	public Long getIdUsuario() {
+		return idUsuario;
+	}
+	public void setIdUsuario(Long idUsuario) {
+		this.idUsuario = idUsuario;
+	}
+	public List<Telefone> getTelefones() {
+		return telefones;
+	}
+	public void setTelefones(List<Telefone> telefones) {
+		this.telefones = telefones;
+	}
 
 }

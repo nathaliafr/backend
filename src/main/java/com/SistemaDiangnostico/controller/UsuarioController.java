@@ -45,7 +45,7 @@ public class UsuarioController {
 	
 	@PostMapping
 	public @ResponseBody Usuario editarUsuario(@RequestBody Usuario usuario) {
-		return usuarioService.editarUsuario(usuario.getId(), usuario);
+		return usuarioService.editarUsuario(usuario.getIdUsuario(), usuario);
 	}
 	
 	@PutMapping

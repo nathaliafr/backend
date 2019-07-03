@@ -27,7 +27,7 @@ public class TelefoneService {
 	}
 	
 	public Telefone editarTelefone(Long id, Telefone telefone) {
-		telefone.setId(id);
+		telefone.setIdTelefone(id);
 		return telefoneRepositorio.save(telefone);
 	}
 	

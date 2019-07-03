@@ -9,16 +9,17 @@ import javax.persistence.Table;
 public class Telefone {
 
 	@Id
-	private Long id;
+	private Long idTelefone;
 	private int numero;
 	private String tipo;
+
+	public Long getIdTelefone() {
+		return idTelefone;
+	}
+	public void setIdTelefone(Long idTelefone) {
+		this.idTelefone = idTelefone;
+	}
 	
-	public Long getId() {
-		return id;
-	}
-	public void setId(Long id) {
-		this.id = id;
-	}
 	public int getNumero() {
 		return numero;
 	}
