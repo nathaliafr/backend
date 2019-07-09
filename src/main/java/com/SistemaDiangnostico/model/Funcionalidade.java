@@ -1,6 +1,7 @@
 package com.SistemaDiangnostico.model;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
@@ -9,14 +10,15 @@ import javax.persistence.Table;
 public class Funcionalidade {
 	
 	@Id
-	private Long id;
+	@GeneratedValue
+	private Long idFuncionalidade;
 	private String nome;
 	
-	public Long getId() {
-		return id;
+	public Long getIdFuncionalidade() {
+		return idFuncionalidade;
 	}
-	public void setId(Long id) {
-		this.id = id;
+	public void setIdFuncionalidade(Long idFuncionalidade) {
+		this.idFuncionalidade = idFuncionalidade;
 	}
 	public String getNome() {
 		return nome;

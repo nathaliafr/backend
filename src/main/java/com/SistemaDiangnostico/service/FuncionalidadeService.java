@@ -14,20 +14,20 @@ public class FuncionalidadeService {
 	@Autowired
  	private FuncionalidadeRepositorio funcionalidadeRepositorio;
 
-	public Funcionalidade buscarFuncionalidadePorId(Long id){
-		return funcionalidadeRepositorio.findById(id).get();
+	public Funcionalidade buscarFuncionalidadePorId(Long idFuncionalidade){
+		return funcionalidadeRepositorio.findById(idFuncionalidade).get();
 	}
 	
 	public List <Funcionalidade> buscarTodasFuncionalidade() {
 		return funcionalidadeRepositorio.findAll();
 	}
 	
-	public void deletarFuncionalidade(Long id) {
-		funcionalidadeRepositorio.deleteById(id);
+	public void deletarFuncionalidade(Long idFuncionalidade) {
+		funcionalidadeRepositorio.deleteById(idFuncionalidade);
 	}
 	
-	public Funcionalidade editarFuncionalidade(Long id, Funcionalidade funcionalidade) {
-		funcionalidade.setId(id);
+	public Funcionalidade editarFuncionalidade(Long idFuncionalidade, Funcionalidade funcionalidade) {
+		funcionalidade.setIdFuncionalidade(idFuncionalidade);
 		return funcionalidadeRepositorio.save(funcionalidade);
 	}
 	

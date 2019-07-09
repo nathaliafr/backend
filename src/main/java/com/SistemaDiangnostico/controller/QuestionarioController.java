@@ -44,7 +44,7 @@ public class QuestionarioController {
 	
 	@PostMapping
 	public @ResponseBody Questionario editarQuestionario(@RequestBody Questionario questionario) {
-		return questionarioService.editarQuestionario(questionario.getId(), questionario);
+		return questionarioService.editarQuestionario(questionario.getIdQuestionario(), questionario);
 	}
 	
 	@PutMapping

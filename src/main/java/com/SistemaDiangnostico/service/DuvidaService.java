@@ -14,20 +14,20 @@ public class DuvidaService {
 	@Autowired
 	private DuvidaRepositorio duvidaRepositorio;
 
-	public Duvida buscarDuvidaPorId(Long id) {
-		return duvidaRepositorio.findById(id).get();
+	public Duvida buscarDuvidaPorId(Long idDuvida) {
+		return duvidaRepositorio.findById(idDuvida).get();
 	}
 
 	public List<Duvida> buscarTodasDuvida() {
 		return duvidaRepositorio.findAll();
 	}
 
-	public void deletarDuvida(Long id) {
-		duvidaRepositorio.deleteById(id);
+	public void deletarDuvida(Long idDuvida) {
+		duvidaRepositorio.deleteById(idDuvida);
 	}
 
-	public Duvida editarDuvida(Long id, Duvida duvida) {
-		duvida.setId(id);
+	public Duvida editarDuvida(Long idDuvida, Duvida duvida) {
+		duvida.setIdDuvida(idDuvida);
 		return duvidaRepositorio.save(duvida);
 	}
 

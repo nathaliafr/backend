@@ -42,7 +42,7 @@ public class PerguntaController {
 	
 	@PostMapping
 	public @ResponseBody Pergunta editarPergunta(@RequestBody Pergunta pergunta) {
-		return perguntaService.editarPergunta(pergunta.getId(), pergunta);
+		return perguntaService.editarPergunta(pergunta.getIdPergunta(), pergunta);
 	}
 	
 	@PutMapping

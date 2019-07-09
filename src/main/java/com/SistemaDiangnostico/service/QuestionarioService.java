@@ -13,20 +13,20 @@ public class QuestionarioService {
 	@Autowired
  	private QuestionarioRepositorio questionarioRepositorio;
 
-	public Questionario buscarQuestionarioPorId(Long id){
-		return questionarioRepositorio.findById(id).get();
+	public Questionario buscarQuestionarioPorId(Long idQuestionario){
+		return questionarioRepositorio.findById(idQuestionario).get();
 	}
 	
 	public List <Questionario> buscarTodosQuestionario() {
 		return questionarioRepositorio.findAll();
 	}
 	
-	public void deletarQuestionario(Long id) {
-		questionarioRepositorio.deleteById(id);
+	public void deletarQuestionario(Long idQuestionario) {
+		questionarioRepositorio.deleteById(idQuestionario);
 	}
 	
-	public Questionario editarQuestionario(Long id, Questionario questionario) {
-		questionario.setId(id);
+	public Questionario editarQuestionario(Long idQuestionario, Questionario questionario) {
+		questionario.setIdQuestionario(idQuestionario);
 		return questionarioRepositorio.save(questionario);
 	}
 	

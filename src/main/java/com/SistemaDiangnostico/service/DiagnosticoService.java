@@ -14,20 +14,20 @@ public class DiagnosticoService {
 	@Autowired
 	private DiagnosticoRepositorio diagnosticoRepositorio;
 
-	public Diagnostico buscarDiagnosticoPorId(Long id) {
-		return diagnosticoRepositorio.findById(id).get();
+	public Diagnostico buscarDiagnosticoPorId(Long idDiagnostico) {
+		return diagnosticoRepositorio.findById(idDiagnostico).get();
 	}
 
 	public List<Diagnostico> buscarTodosDiagnostico() {
 		return diagnosticoRepositorio.findAll();
 	}
 
-	public void deletarDiagnostico(Long id) {
-		diagnosticoRepositorio.deleteById(id);
+	public void deletarDiagnostico(Long idDiagnostico) {
+		diagnosticoRepositorio.deleteById(idDiagnostico);
 	}
 
-	public Diagnostico editarDiagnostico(Long id, Diagnostico diagnostico) {
-		diagnostico.setId(id);
+	public Diagnostico editarDiagnostico(Long idDiagnostico, Diagnostico diagnostico) {
+		diagnostico.setIdDiagnostico(idDiagnostico);
 		return diagnosticoRepositorio.save(diagnostico);
 	}
 

@@ -44,7 +44,7 @@ public class MenuController {
 	
 	@PostMapping
 	public @ResponseBody Menu editarMenu(@RequestBody Menu menu) {
-		return menuService.editarMenu(menu.getId(), menu);
+		return menuService.editarMenu(menu.getIdMenu(), menu);
 	}
 	
 	@PutMapping

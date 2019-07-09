@@ -45,7 +45,7 @@ public class FuncionalidadeController {
 	
 	@PostMapping
 	public @ResponseBody Funcionalidade editarFuncionalidade(@RequestBody Funcionalidade funcionalidade) {
-		return funcionalidadeService.editarFuncionalidade(funcionalidade.getId(), funcionalidade);
+		return funcionalidadeService.editarFuncionalidade(funcionalidade.getIdFuncionalidade(), funcionalidade);
 	}
 	
 	@PutMapping

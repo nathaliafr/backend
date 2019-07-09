@@ -1,6 +1,7 @@
 package com.SistemaDiangnostico.model;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
@@ -9,9 +10,11 @@ import javax.persistence.Table;
 public class Telefone {
 
 	@Id
+	@GeneratedValue
 	private Long idTelefone;
 	private int numero;
 	private String tipo;
+	private Long idUsuario;
 
 	public Long getIdTelefone() {
 		return idTelefone;
@@ -31,6 +34,12 @@ public class Telefone {
 	}
 	public void setTipo(String tipo) {
 		this.tipo = tipo;
+	}
+	public Long getIdUsuario() {
+		return idUsuario;
+	}
+	public void setIdUsuario(Long idUsuario) {
+		this.idUsuario = idUsuario;
 	}
 	
 }

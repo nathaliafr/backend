@@ -14,20 +14,20 @@ public class CriancaService {
 	@Autowired
 	private CriancaRepositorio criancaRepositorio;
 
-	public Crianca buscarCriancaPorId(Long id) {
-		return criancaRepositorio.findById(id).get();
+	public Crianca buscarCriancaPorId(Long idCrianca) {
+		return criancaRepositorio.findById(idCrianca).get();
 	}
 
 	public List<Crianca> buscarTodasCrianca() {
 		return criancaRepositorio.findAll();
 	}
 
-	public void deletarCrianca(Long id) {
-		criancaRepositorio.deleteById(id);
+	public void deletarCrianca(Long idCrianca) {
+		criancaRepositorio.deleteById(idCrianca);
 	}
 
-	public Crianca editarCrianca(Long id, Crianca crianca) {
-		crianca.setId(id);
+	public Crianca editarCrianca(Long idCrianca, Crianca crianca) {
+		crianca.setIdCrianca(idCrianca);
 		return criancaRepositorio.save(crianca);
 	}
 

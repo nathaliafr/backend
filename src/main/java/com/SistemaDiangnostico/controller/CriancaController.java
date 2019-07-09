@@ -44,7 +44,7 @@ public class CriancaController {
 
 	@PostMapping
 	public @ResponseBody Crianca editarCrianca(@RequestBody Crianca crianca) {
-		return criancaService.editarCrianca(crianca.getId(), crianca);
+		return criancaService.editarCrianca(crianca.getIdCrianca(), crianca);
 	}
 
 	@PutMapping

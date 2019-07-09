@@ -44,7 +44,7 @@ public class DuvidaController {
 
 	@PostMapping
 	public @ResponseBody Duvida editarDuvida(@RequestBody Duvida duvida) {
-		return duvidaService.editarDuvida(duvida.getId(), duvida);
+		return duvidaService.editarDuvida(duvida.getIdDuvida(), duvida);
 	}
 
 	@PutMapping

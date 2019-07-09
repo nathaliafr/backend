@@ -16,41 +16,39 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.SistemaDiangnostico.model.Categoria;
 import com.SistemaDiangnostico.service.CategoriaService;
 
-
-	@Controller
-	@RequestMapping ("/categoria")
+@Controller
+@RequestMapping("/categoria")
 public class CategoriaController {
 
-		
-		@Autowired
-		CategoriaService categoriaService;
-		
-		@GetMapping ("/{id}")
-		public @ResponseBody Categoria getCategoriaPorId (@PathVariable Long id) {
-			return categoriaService.buscarCategoriaPorId(id);
-		}
-		
-		@GetMapping("/")
-		public @ResponseBody List<Categoria> getTodasCategoria () {
-			
-			List<Categoria> buscarTodasCategoria = categoriaService.buscarTodasCategoria();
-			 
-			return buscarTodasCategoria;
-		}
-		
-		@DeleteMapping ("/{id}")
-		public @ResponseBody boolean deletearCategoria(@PathVariable Long id) {
-			categoriaService.deletarCategoria(id);
-			return true;
-		}
-		
-		@PostMapping
-		public @ResponseBody Categoria editarCategoria(@RequestBody Categoria categoria) {
-			return categoriaService.editarCategoria(categoria.getId(), categoria);
-		}
-		
-		@PutMapping
-		public @ResponseBody Categoria criarUsuario(@RequestBody Categoria categoria) {
-			return categoriaService.criarCategoria(categoria);
-		}
+	@Autowired
+	CategoriaService categoriaService;
+
+	@GetMapping("/{id}")
+	public @ResponseBody Categoria getCategoriaPorId(@PathVariable Long id) {
+		return categoriaService.buscarCategoriaPorId(id);
 	}
+
+	@GetMapping("/")
+	public @ResponseBody List<Categoria> getTodasCategoria() {
+
+		List<Categoria> buscarTodasCategoria = categoriaService.buscarTodasCategoria();
+
+		return buscarTodasCategoria;
+	}
+
+	@DeleteMapping("/{id}")
+	public @ResponseBody boolean deletearCategoria(@PathVariable Long id) {
+		categoriaService.deletarCategoria(id);
+		return true;
+	}
+
+	@PostMapping
+	public @ResponseBody Categoria editarCategoria(@RequestBody Categoria categoria) {
+		return categoriaService.editarCategoria(categoria.getIdCategoria(), categoria);
+	}
+
+	@PutMapping
+	public @ResponseBody Categoria criarUsuario(@RequestBody Categoria categoria) {
+		return categoriaService.criarCategoria(categoria);
+	}
+}

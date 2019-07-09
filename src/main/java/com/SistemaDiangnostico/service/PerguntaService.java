@@ -14,20 +14,20 @@ public class PerguntaService {
 	@Autowired
 	private PerguntaRepositorio perguntaRepositorio;
 	
-	public Pergunta buscarPerguntaPorId(Long id) {
-		return perguntaRepositorio.findById(id).get();
+	public Pergunta buscarPerguntaPorId(Long idPergunta) {
+		return perguntaRepositorio.findById(idPergunta).get();
 	}
 	
 	public List<Pergunta> buscarTodasPergunta() {
 		return perguntaRepositorio.findAll();
 	}
 	
-	public void deletarPergunta(Long id) {
-		perguntaRepositorio.deleteById(id);
+	public void deletarPergunta(Long idPergunta) {
+		perguntaRepositorio.deleteById(idPergunta);
 	}
 	
-	public Pergunta editarPergunta(Long id, Pergunta pergunta) {
-		pergunta.setId(id);
+	public Pergunta editarPergunta(Long idPergunta, Pergunta pergunta) {
+		pergunta.setIdPergunta(idPergunta);
 		return perguntaRepositorio.save(pergunta);
 	}
 	

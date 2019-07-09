@@ -14,20 +14,20 @@ public class RespostaService {
 	@Autowired
 	private RespostaRepositorio respostaRepositorio;
 	
-	public Resposta buscarRespostaPorId (Long id) {
-		return respostaRepositorio.findById(id).get();
+	public Resposta buscarRespostaPorId (Long idResposta) {
+		return respostaRepositorio.findById(idResposta).get();
 	}
 	
 	public List<Resposta> buscarTodasResposta() {
 		return respostaRepositorio.findAll();
 	}
 	
-	public void deletarResposta(Long id) {
-		respostaRepositorio.deleteById(id);
+	public void deletarResposta(Long idResposta) {
+		respostaRepositorio.deleteById(idResposta);
 	}
 	
-	public Resposta editarResposta(Long id, Resposta resposta) {
-		resposta.setId(id);
+	public Resposta editarResposta(Long idResposta, Resposta resposta) {
+		resposta.setIdResposta(idResposta);
 		return respostaRepositorio.save(resposta);
 	}
 	

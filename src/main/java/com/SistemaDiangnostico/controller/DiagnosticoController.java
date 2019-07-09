@@ -45,7 +45,7 @@ public class DiagnosticoController {
 		
 		@PostMapping
 		public @ResponseBody Diagnostico editarDiagnostico(@RequestBody Diagnostico diagnostico) {
-			return diagnosticoService.editarDiagnostico(diagnostico.getId(), diagnostico);
+			return diagnosticoService.editarDiagnostico(diagnostico.getIdDiagnostico(), diagnostico);
 		}
 		
 		@PutMapping

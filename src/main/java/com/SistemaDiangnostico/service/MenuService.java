@@ -14,20 +14,20 @@ public class MenuService {
 	@Autowired
  	private MenuRepositorio menuRepositorio;
 
-	public Menu buscarMenuPorId(Long id){
-		return menuRepositorio.findById(id).get();
+	public Menu buscarMenuPorId(Long idMenu){
+		return menuRepositorio.findById(idMenu).get();
 	}
 	
 	public List <Menu> buscarTodosMenu() {
 		return menuRepositorio.findAll();
 	}
 	
-	public void deletarMenu(Long id) {
-		menuRepositorio.deleteById(id);
+	public void deletarMenu(Long idMenu) {
+		menuRepositorio.deleteById(idMenu);
 	}
 	
-	public Menu editarMenu(Long id, Menu menu) {
-		menu.setId(id);
+	public Menu editarMenu(Long idMenu, Menu menu) {
+		menu.setIdMenu(idMenu);
 		return menuRepositorio.save(menu);
 	}
 	
