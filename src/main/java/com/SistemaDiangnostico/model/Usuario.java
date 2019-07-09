@@ -32,7 +32,7 @@ public class Usuario {
 	private Long idMenu;
 	
 	@OneToMany
-	@JoinColumn(name = "idMenu")
+	@JoinColumn(name = "idUsuario")
 	private List<Menu> menu;
 
 	@OneToMany

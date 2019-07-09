@@ -14,8 +14,16 @@ public class Menu {
 	private Long idMenu;
 	private String tipo;
 	private Long idCategoria;
+	private Long idUsuario;
 
- 
+	public Long getIdUsuario() {
+		return idUsuario;
+	}
+
+	public void setIdUsuario(Long idUsuario) {
+		this.idUsuario = idUsuario;
+	}
+
 	public Long getIdCategoria() {
 		return idCategoria;
 	}
@@ -23,8 +31,6 @@ public class Menu {
 	public void setIdCategoria(Long idCategoria) {
 		this.idCategoria = idCategoria;
 	}
-
- 
 
 	public Long getIdMenu() {
 		return idMenu;
