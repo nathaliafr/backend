@@ -41,5 +41,6 @@ public class Telefone {
 	public void setIdUsuario(Long idUsuario) {
 		this.idUsuario = idUsuario;
 	}
+	 
 	
 }

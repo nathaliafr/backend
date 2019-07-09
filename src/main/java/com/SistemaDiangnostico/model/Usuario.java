@@ -30,6 +30,10 @@ public class Usuario {
 	private String complememto;
 	private Long numero;
 	private Long idMenu;
+	
+	@OneToMany
+	@JoinColumn(name = "idMenu")
+	private List<Menu> menu;
 
 	@OneToMany
 	@JoinColumn(name = "idUsuario")
@@ -165,6 +169,16 @@ public class Usuario {
 
 	public void setIdMenu(Long idMenu) {
 		this.idMenu = idMenu;
+	}
+
+	
+
+	public List<Menu> getMenu() {
+		return menu;
+	}
+
+	public void setMenu(List<Menu> menu) {
+		this.menu = menu;
 	}
 
 }

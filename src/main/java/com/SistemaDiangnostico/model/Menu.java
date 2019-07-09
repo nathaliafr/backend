@@ -1,12 +1,8 @@
 package com.SistemaDiangnostico.model;
 
-import java.util.List;
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -19,10 +15,7 @@ public class Menu {
 	private String tipo;
 	private Long idCategoria;
 
-	@OneToMany
-	@JoinColumn(name = "idMenu")
-	private List<Usuario> usuarios;
-
+ 
 	public Long getIdCategoria() {
 		return idCategoria;
 	}
@@ -31,13 +24,7 @@ public class Menu {
 		this.idCategoria = idCategoria;
 	}
 
-	public List<Usuario> getUsuarios() {
-		return usuarios;
-	}
-
-	public void setUsuarios(List<Usuario> usuarios) {
-		this.usuarios = usuarios;
-	}
+ 
 
 	public Long getIdMenu() {
 		return idMenu;
