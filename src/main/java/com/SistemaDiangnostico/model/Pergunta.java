@@ -17,21 +17,13 @@ public class Pergunta {
 	@GeneratedValue
 	private Long idPergunta;
 	private String texo;
-	private Long idQuestao;
-
+ 
 	@OneToMany
-	@JoinColumn(name = "idQuestao")
+	@JoinColumn(name = "IdPergunta")
 	private List<Resposta> respostas;
 
 
-	public Long getIdQuestao() {
-		return idQuestao;
-	}
-
-	public void setIdQuestao(Long idQuestao) {
-		this.idQuestao = idQuestao;
-	}
-
+	 
 	public void setRespostas(List<Resposta> respostas) {
 		this.respostas = respostas;
 	}

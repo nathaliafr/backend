@@ -32,15 +32,15 @@ public class Usuario {
 	private Long idMenu;
 	
 	@OneToMany
-	@JoinColumn(name = "idUsuario")
+	@JoinColumn(name = "idMenu")
 	private List<Menu> menu;
 
 	@OneToMany
-	@JoinColumn(name = "idUsuario")
+	@JoinColumn(name = "idTelefone")
 	private List<Telefone> telefones;
 
 	@OneToMany
-	@JoinColumn(name = "idUsuario")
+	@JoinColumn(name = "idCrianca")
 	private List<Crianca> crianca;
 
 	public List<Crianca> getCrianca() {

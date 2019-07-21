@@ -20,7 +20,7 @@ public class Questionario {
 	private Long idDiagnostico;
 
 	@OneToMany
-	@JoinColumn(name = "idQuestionario")
+	@JoinColumn(name = "idCrianca")
 	private List<Crianca> criancas;
 
 	public List<Crianca> getCriancas() {

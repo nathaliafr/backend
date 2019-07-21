@@ -19,9 +19,14 @@ public class Diagnostico {
 	private String texto;
 
 	@OneToMany
-	@JoinColumn(name = "idDiagnostico")
+	@JoinColumn(name = "idQuestionario")
 	private List<Questionario> questionarios;
 
+	
+	@OneToMany
+	@JoinColumn(name = "idResposta")
+	private List<Resposta> respostas;
+	
 	public List<Questionario> getQuestionarios() {
 		return questionarios;
 	}

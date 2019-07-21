@@ -19,7 +19,7 @@ public class Categoria {
 	private String tipo;
 
 	@OneToMany
-	@JoinColumn(name = "idCategoria")
+	@JoinColumn(name = "idMenu")
 	private List<Menu> menus;
 
 	public List<Menu> getMenus() {
