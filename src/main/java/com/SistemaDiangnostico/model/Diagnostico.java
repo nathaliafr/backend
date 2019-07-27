@@ -17,10 +17,19 @@ public class Diagnostico {
 	@GeneratedValue
 	private Long idDiagnostico;
 	private String texto;
+	private Long idResposta;
 
 	@OneToMany
 	@JoinColumn(name = "idDiagnostico")
 	private List<Questionario> questionarios;
+
+	public Long getIdResposta() {
+		return idResposta;
+	}
+
+	public void setIdResposta(Long idResposta) {
+		this.idResposta = idResposta;
+	}
 
 	public List<Questionario> getQuestionarios() {
 		return questionarios;

@@ -1,8 +1,12 @@
 package com.SistemaDiangnostico.model;
 
+import java.util.List;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -11,33 +15,28 @@ public class Resposta {
 
 	@Id
 	@GeneratedValue
-	private Long id;
+	private Long idResposta;
 	private String texto;
 	private Long idQuestao;
-	private Long idDiagnostico;
 
-	public Long getId() {
-		return id;
+	@OneToMany
+	@JoinColumn(name = "idResposta")
+	private List<Diagnostico> diagnosticos; 
+
+	public List<Diagnostico> getDiagnosticos() {
+		return diagnosticos;
 	}
 
-	public void setId(Long id) {
-		this.id = id;
-	}
-
-	public Long getIdDiagnostico() {
-		return idDiagnostico;
-	}
-
-	public void setIdDiagnostico(Long idDiagnostico) {
-		this.idDiagnostico = idDiagnostico;
+	public void setDiagnosticos(List<Diagnostico> diagnosticos) {
+		this.diagnosticos = diagnosticos;
 	}
 
 	public Long getIdResposta() {
-		return id;
+		return idResposta;
 	}
 
 	public void setIdResposta(Long idResposta) {
-		this.id = idResposta;
+		this.idResposta = idResposta;
 	}
 
 	public String getTexto() {

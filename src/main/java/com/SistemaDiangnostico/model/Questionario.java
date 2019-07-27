@@ -18,10 +18,19 @@ public class Questionario {
 	private Long idQuestionario;
 	private String texto;
 	private Long idDiagnostico;
+	private Long idPergunta;
 
 	@OneToMany
 	@JoinColumn(name = "idQuestionario")
 	private List<Crianca> criancas;
+
+	public Long getIdPergunta() {
+		return idPergunta;
+	}
+
+	public void setIdPergunta(Long idPergunta) {
+		this.idPergunta = idPergunta;
+	}
 
 	public List<Crianca> getCriancas() {
 		return criancas;

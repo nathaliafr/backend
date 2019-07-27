@@ -20,9 +20,20 @@ public class Pergunta {
 	private Long idQuestao;
 
 	@OneToMany
+	@JoinColumn(name = "idPergunta")
+	private List<Questionario> questionarios;
+
+	@OneToMany
 	@JoinColumn(name = "idQuestao")
 	private List<Resposta> respostas;
 
+	public List<Questionario> getQuestionarios() {
+		return questionarios;
+	}
+
+	public void setQuestionarios(List<Questionario> questionarios) {
+		this.questionarios = questionarios;
+	}
 
 	public Long getIdQuestao() {
 		return idQuestao;
