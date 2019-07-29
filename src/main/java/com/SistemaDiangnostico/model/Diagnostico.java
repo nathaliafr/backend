@@ -16,16 +16,15 @@ public class Diagnostico {
 	@Id
 	@GeneratedValue
 	private Long idDiagnostico;
-	private String texto;
 
 	@OneToMany
 	@JoinColumn(name = "idQuestionario")
 	private List<Questionario> questionarios;
-
-	
 	@OneToMany
 	@JoinColumn(name = "idResposta")
 	private List<Resposta> respostas;
+
+	
 	
 	public List<Questionario> getQuestionarios() {
 		return questionarios;
@@ -43,12 +42,6 @@ public class Diagnostico {
 		this.idDiagnostico = idDiagnostico;
 	}
 
-	public String getTexto() {
-		return texto;
-	}
-
-	public void setTexto(String texto) {
-		this.texto = texto;
-	}
+	 
 
 }

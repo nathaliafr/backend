@@ -19,15 +19,7 @@ public class Crianca {
 	private String nacionalidade;
 	private LocalDate dataNascimento;
 	private Long idUsuario;
-	private Long idQuestionario;
-
-	public Long getIdQuestionario() {
-		return idQuestionario;
-	}
-
-	public void setIdQuestionario(Long idQuestionario) {
-		this.idQuestionario = idQuestionario;
-	}
+  
 
 	public Long getIdCrianca() {
 		return idCrianca;
