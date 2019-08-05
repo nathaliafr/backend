@@ -29,18 +29,17 @@ public class Usuario {
 	private String cidade;
 	private String complememto;
 	private Long numero;
-	private Long idMenu;
-	
+ 	
 	@OneToMany
-	@JoinColumn(name = "idMenu")
+	@JoinColumn(name = "idUsuario")
 	private List<Menu> menu;
 
 	@OneToMany
-	@JoinColumn(name = "idTelefone")
+	@JoinColumn(name = "idUsuario")
 	private List<Telefone> telefones;
 
 	@OneToMany
-	@JoinColumn(name = "idCrianca")
+	@JoinColumn(name = "idUsuario")
 	private List<Crianca> crianca;
 
 	public List<Crianca> getCrianca() {
@@ -163,14 +162,7 @@ public class Usuario {
 		this.telefones = telefones;
 	}
 
-	public Long getIdMenu() {
-		return idMenu;
-	}
-
-	public void setIdMenu(Long idMenu) {
-		this.idMenu = idMenu;
-	}
-
+	 
 	
 
 	public List<Menu> getMenu() {

@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.SistemaDiangnostico.dto.ResponderPerguntaRequest;
+import com.SistemaDiangnostico.dto.ResponderPerguntaRequestList;
 import com.SistemaDiangnostico.model.Questionario;
 import com.SistemaDiangnostico.service.QuestionarioService;
 
@@ -49,8 +49,8 @@ public class QuestionarioController {
 	}
 	
 	@PostMapping("/responderPergunta")
-	public @ResponseBody Questionario responderPergunta(@RequestBody List<ResponderPerguntaRequest> responderPerguntaRequest) {
-		return questionarioService.responderPerguntaRequest(responderPerguntaRequest);
+	public @ResponseBody Questionario responderPergunta(@RequestBody ResponderPerguntaRequestList responderPerguntaRequest) {
+		return questionarioService.responderPerguntaRequest(responderPerguntaRequest.getCriancaId() , responderPerguntaRequest.getResponderPerguntaRequestList());
 	}
 	
 	@PutMapping

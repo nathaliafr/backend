@@ -16,15 +16,18 @@ public class Resposta {
 	@GeneratedValue
 	private Long idResposta;
 	private String texto;
-   
-	@OneToOne
-	@JoinColumn(name = "idDoenca")
-	private Doenca doenca;
- 	
- 
 
-	public Doenca getDoenca() {
-		return doenca;
+ 	
+	@OneToOne
+	@JoinColumn(name = "idCriterio")
+	private Criterio criterio;
+
+	public Criterio getCriterio() {
+		return criterio;
+	}
+
+	public void setCriterio(Criterio criterio) {
+		this.criterio = criterio;
 	}
 
 	public Long getIdResposta() {
@@ -34,11 +37,6 @@ public class Resposta {
 	public void setIdResposta(Long idResposta) {
 		this.idResposta = idResposta;
 	}
-
-	public void setDoenca(Doenca doenca) {
-		this.doenca = doenca;
-	}
-  
 
 	public String getTexto() {
 		return texto;

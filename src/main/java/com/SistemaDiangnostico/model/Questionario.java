@@ -1,9 +1,12 @@
 package com.SistemaDiangnostico.model;
 
+import java.util.List;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -14,45 +17,15 @@ public class Questionario {
 	@Id
 	@GeneratedValue
 	private Long idQuestionario;
+	
 	@OneToOne
 	@JoinColumn(name = "idCrianca")
 	private Crianca criança;
-	@OneToOne
-	@JoinColumn(name = "idDoenca")
-	private Doenca doenca;
-
-	@OneToOne
-	@JoinColumn(name = "idPergunta")
-	private Pergunta pergunta;
-	@OneToOne
-	@JoinColumn(name = "idResposta")
-	private Resposta resposta;
-
 	
-	public Pergunta getPergunta() {
-		return pergunta;
-	}
-
-	public void setPergunta(Pergunta pergunta) {
-		this.pergunta = pergunta;
-	}
-
-	public Resposta getResposta() {
-		return resposta;
-	}
-
-	public void setResposta(Resposta resposta) {
-		this.resposta = resposta;
-	}
-
-	public Doenca getDoenca() {
-		return doenca;
-	}
-
-	public void setDoenca(Doenca doenca) {
-		this.doenca = doenca;
-	}
-
+	@OneToMany
+	@JoinColumn(name = "idQuestionario")
+	private List<Diagnostico> diagnostico;
+	
 	public Crianca getCriança() {
 		return criança;
 	}
@@ -68,6 +41,16 @@ public class Questionario {
 	public void setIdQuestionario(Long idQuestionario) {
 		this.idQuestionario = idQuestionario;
 	}
+
+	public List<Diagnostico> getDiagnostico() {
+		return diagnostico;
+	}
+
+	public void setDiagnostico(List<Diagnostico> diagnostico) {
+		this.diagnostico = diagnostico;
+	}
+
+	 
 
 	 
 }
