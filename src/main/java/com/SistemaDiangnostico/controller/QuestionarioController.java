@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.SistemaDiangnostico.dto.GraficoResultadoDto;
 import com.SistemaDiangnostico.dto.ResponderPerguntaRequestList;
 import com.SistemaDiangnostico.model.Questionario;
 import com.SistemaDiangnostico.service.QuestionarioService;
@@ -39,7 +40,7 @@ public class QuestionarioController {
 	
 	@DeleteMapping ("/{id}")
 	public @ResponseBody boolean deletarQuestionario(@PathVariable Long id) {
-		questionarioService.deletarQuestionario(id);;
+		questionarioService.deletarQuestionario(id);
 		return true;
 	}
 	
@@ -49,8 +50,9 @@ public class QuestionarioController {
 	}
 	
 	@PostMapping("/responderPergunta")
-	public @ResponseBody Questionario responderPergunta(@RequestBody ResponderPerguntaRequestList responderPerguntaRequest) {
-		return questionarioService.responderPerguntaRequest(responderPerguntaRequest.getCriancaId() , responderPerguntaRequest.getResponderPerguntaRequestList());
+	public @ResponseBody GraficoResultadoDto responderPergunta(@RequestBody ResponderPerguntaRequestList responderPerguntaRequest) {
+		GraficoResultadoDto graficoResultadoDto = questionarioService.responderPerguntaRequest(responderPerguntaRequest.getCriancaId() , responderPerguntaRequest.getResponderPerguntaRequestList());
+ 		return graficoResultadoDto;
 	}
 	
 	@PutMapping
