@@ -1,11 +1,15 @@
 package com.SistemaDiangnostico.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.SistemaDiangnostico.dto.PerguntaDto;
+import com.SistemaDiangnostico.dto.RespostaDto;
 import com.SistemaDiangnostico.model.Pergunta;
+import com.SistemaDiangnostico.model.Resposta;
 import com.SistemaDiangnostico.repositorio.PerguntaRepositorio;
 
 @Service
@@ -18,8 +22,22 @@ public class PerguntaService {
 		return perguntaRepositorio.findById(idPergunta).get();
 	}
 	
-	public List<Pergunta> buscarTodasPergunta() {
-		return perguntaRepositorio.findAll();
+	public List<PerguntaDto> buscarTodasPergunta() {
+		List<Pergunta> findAll = perguntaRepositorio.findAll();
+		List<PerguntaDto> perguntaDtos = new ArrayList<PerguntaDto>();
+
+		for (Pergunta pergunta : findAll) {
+			PerguntaDto perguntaDto =  new PerguntaDto();
+			perguntaDto.setIdPergunta(pergunta.getIdPergunta());
+			perguntaDto.setTexto(pergunta.getTexo());
+			perguntaDtos.add(perguntaDto);
+			List<RespostaDto> respostasDtoList = new ArrayList<>();
+			for(Resposta  resp : pergunta.getRespostas()){
+				respostasDtoList.add(new RespostaDto(resp));
+			}
+			perguntaDto.setRespostas(respostasDtoList);
+		}
+		return perguntaDtos;
 	}
 	
 	public void deletarPergunta(Long idPergunta) {

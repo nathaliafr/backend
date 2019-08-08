@@ -18,23 +18,22 @@ public class Pergunta {
 	@GeneratedValue
 	private Long idPergunta;
 	private String texo;
- 
+
 	@OneToMany
 	@JoinColumn(name = "IdPergunta")
 	private List<Resposta> respostas;
 
-	   
-		@OneToOne
-		@JoinColumn(name = "idDoenca")
-		private Doenca doenca;
-	 
-	public Doenca getDoenca() {
-			return doenca;
-		}
+	@OneToOne
+	@JoinColumn(name = "idDoenca")
+	private Doenca doenca;
 
-		public void setDoenca(Doenca doenca) {
-			this.doenca = doenca;
-		}
+	public Doenca getDoenca() {
+		return doenca;
+	}
+
+	public void setDoenca(Doenca doenca) {
+		this.doenca = doenca;
+	}
 
 	public void setRespostas(List<Resposta> respostas) {
 		this.respostas = respostas;

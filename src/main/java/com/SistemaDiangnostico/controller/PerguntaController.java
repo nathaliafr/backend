@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -13,15 +14,17 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.SistemaDiangnostico.dto.PerguntaDto;
 import com.SistemaDiangnostico.model.Pergunta;
 import com.SistemaDiangnostico.service.PerguntaService;
 
 @Controller
+@CrossOrigin
 @RequestMapping ("/pergunta")
 public class PerguntaController {
 
 	@Autowired
-	PerguntaService perguntaService;
+	private PerguntaService perguntaService;
 	
 	@GetMapping("/{id}")
 	public @ResponseBody Pergunta getPerguntaPorId(@PathVariable Long id) {
@@ -29,8 +32,8 @@ public class PerguntaController {
 	}
 	
 	@GetMapping("/")
-	public @ResponseBody List<Pergunta> getTodasPergunta(){
-		List<Pergunta> buscarTodasPergunta = perguntaService.buscarTodasPergunta();
+	public @ResponseBody List<PerguntaDto> getTodasPergunta(){
+		List<PerguntaDto> buscarTodasPergunta = perguntaService.buscarTodasPergunta();
 		return buscarTodasPergunta;
 	}
 	
