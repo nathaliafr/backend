@@ -29,6 +29,7 @@ public class Usuario {
 	private String cidade;
 	private String complememto;
 	private Long numero;
+	private String senha;
  	
 	@OneToMany
 	@JoinColumn(name = "idUsuario")
@@ -171,6 +172,14 @@ public class Usuario {
 
 	public void setMenu(List<Menu> menu) {
 		this.menu = menu;
+	}
+
+	public String getSenha() {
+		return senha;
+	}
+
+	public void setSenha(String senha) {
+		this.senha = senha;
 	}
 
 }

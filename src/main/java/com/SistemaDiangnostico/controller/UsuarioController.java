@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -18,6 +19,7 @@ import com.SistemaDiangnostico.service.UsuarioService;
 
 
 @Controller
+@CrossOrigin
 @RequestMapping ("/usuario")
 public class UsuarioController {
 	
@@ -50,6 +52,11 @@ public class UsuarioController {
 	
 	@PutMapping
 	public @ResponseBody Usuario criarUsuario(@RequestBody Usuario usuario) {
+		return usuarioService.criarUsuario(usuario);
+	}
+	
+	@PostMapping ("/{novoUsuario}")
+	public @ResponseBody Usuario novoUsuario(@RequestBody Usuario usuario) {
 		return usuarioService.criarUsuario(usuario);
 	}
 }

@@ -30,12 +30,12 @@ public class PerguntaService {
 			PerguntaDto perguntaDto =  new PerguntaDto();
 			perguntaDto.setIdPergunta(pergunta.getIdPergunta());
 			perguntaDto.setTexto(pergunta.getTexo());
-			perguntaDtos.add(perguntaDto);
 			List<RespostaDto> respostasDtoList = new ArrayList<>();
 			for(Resposta  resp : pergunta.getRespostas()){
 				respostasDtoList.add(new RespostaDto(resp));
 			}
 			perguntaDto.setRespostas(respostasDtoList);
+			perguntaDtos.add(perguntaDto);
 		}
 		return perguntaDtos;
 	}
