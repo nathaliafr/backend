@@ -1,13 +1,13 @@
 package com.SistemaDiangnostico.dto;
 
-import java.util.Date;
 
-public class RestSenhaDto {
+public class ResetSenhaDto {
 
 	private String email;
 	private String documento;
-	private Date dataNascimento;
+	private String   dataNascimento;
 	private String novaSenha;
+	
 	public String getEmail() {
 		return email;
 	}
@@ -20,10 +20,10 @@ public class RestSenhaDto {
 	public void setDocumento(String documento) {
 		this.documento = documento;
 	}
-	public Date getDataNascimento() {
+	public String getDataNascimento() {
 		return dataNascimento;
 	}
-	public void setDataNascimento(Date dataNascimento) {
+	public void setDataNascimento(String dataNascimento) {
 		this.dataNascimento = dataNascimento;
 	}
 	public String getNovaSenha() {
