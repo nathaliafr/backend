@@ -6,4 +6,5 @@ import com.SistemaDiangnostico.model.Usuario;
 
 public interface UsuarioRepositorio extends JpaRepository<Usuario, Long>{
 
+	Usuario findbyEmail(String email);
 }

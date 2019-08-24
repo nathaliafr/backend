@@ -7,9 +7,12 @@ import com.SistemaDiangnostico.model.Usuario;
 import com.SistemaDiangnostico.repositorio.UsuarioRepositorio;
 
 @Service
-public class LoginServie {
+public class LoginService {
 
 	@Autowired
 	private UsuarioRepositorio usuarioRepositorio;
 
+	public Usuario findbyEmail(String email) {
+		return usuarioRepositorio.findbyEmail(email);
+	}
 }
