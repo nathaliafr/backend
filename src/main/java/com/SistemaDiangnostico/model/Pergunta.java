@@ -27,6 +27,20 @@ public class Pergunta {
 	@JoinColumn(name = "idDoenca")
 	private Doenca doenca;
 
+	@OneToOne
+	@JoinColumn(name = "idCriterio")
+	private Criterio criterio;
+
+	
+	
+	public Criterio getCriterio() {
+		return criterio;
+	}
+
+	public void setCriterio(Criterio criterio) {
+		this.criterio = criterio;
+	}
+
 	public Doenca getDoenca() {
 		return doenca;
 	}
