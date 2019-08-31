@@ -6,4 +6,5 @@ import com.SistemaDiangnostico.model.Pergunta;
 
 public interface PerguntaRepositorio extends JpaRepository<Pergunta, Long>{
 
+//	Pergunta findByCriterio(Long idPergunta);
 }

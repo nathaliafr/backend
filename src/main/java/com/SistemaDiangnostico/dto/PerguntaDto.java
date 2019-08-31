@@ -11,6 +11,7 @@ public class PerguntaDto {
 	private List<RespostaDto> respostas;
  	private DoencaDto doenca;
 
+// 	private CriterioDto criterio;
 	  
 	public Long getIdPergunta() {
 		return idPergunta;
@@ -46,4 +47,12 @@ public class PerguntaDto {
 		this.texto = texto;
 	}
 
+/*	public CriterioDto getCriterio() {
+		return criterio;
+	}
+
+	public void setCriterio(CriterioDto criterio) {
+		this.criterio = criterio;
+	}
+*/
 }

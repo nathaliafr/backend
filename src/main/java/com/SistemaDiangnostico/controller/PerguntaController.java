@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.SistemaDiangnostico.dto.CriterioDto;
 import com.SistemaDiangnostico.dto.PerguntaDto;
 import com.SistemaDiangnostico.model.Pergunta;
 import com.SistemaDiangnostico.service.PerguntaService;
@@ -52,4 +53,10 @@ public class PerguntaController {
 	public @ResponseBody Pergunta criarPergunta(@RequestBody Pergunta pergunta) {
 		return perguntaService.criarPergunta(pergunta);
 	}
+	
+	/*@PostMapping ("/criterioPergunta")
+	public @ResponseBody Pergunta criterioPergunta(@RequestBody CriterioDto criterio){
+		Pergunta criterioPergunta = perguntaService.buscaCriterio(criterio);
+		return criterioPergunta;
+	}*/
 }

@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.SistemaDiangnostico.dto.CriterioDto;
 import com.SistemaDiangnostico.dto.PerguntaDto;
 import com.SistemaDiangnostico.dto.RespostaDto;
 import com.SistemaDiangnostico.model.Pergunta;
@@ -52,5 +53,12 @@ public class PerguntaService {
 	public Pergunta criarPergunta(Pergunta pergunta) {
 		return perguntaRepositorio.save(pergunta);
 	}
+	
+
+/*	public Pergunta buscaCriterio(CriterioDto criterio) {
+		Pergunta pergunta = perguntaRepositorio.findByCriterio(criterio.getIdCriterio());
+		return pergunta;
+	}
+*/
 	
 }
