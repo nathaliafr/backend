@@ -53,7 +53,7 @@ public class PerguntaController {
 		return perguntaService.criarPergunta(pergunta);
 	}
 
-	@GetMapping("/criterioPergunta/{idDoenca}")
+	@GetMapping("/listaDePerguntaPorDoenca/{idDoenca}")
 	public @ResponseBody List<PerguntaDto> criterioPergunta(@PathVariable String idDoenca) {
  
 		List<PerguntaDto> criterioPerguntas = perguntaService.buscaCriterio(Long.valueOf(idDoenca));

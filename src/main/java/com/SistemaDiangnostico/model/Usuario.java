@@ -30,14 +30,12 @@ public class Usuario {
 	private String complememto;
 	private Long numero;
 	private String senha;
+	private String telefoneResidencial;
+	private String telefoneCelular;
  	
 	@OneToMany
 	@JoinColumn(name = "idUsuario")
 	private List<Menu> menu;
-
-	@OneToMany
-	@JoinColumn(name = "idUsuario")
-	private List<Telefone> telefones;
 
 	@OneToMany
 	@JoinColumn(name = "idUsuario")
@@ -155,17 +153,6 @@ public class Usuario {
 		this.idUsuario = idUsuario;
 	}
 
-	public List<Telefone> getTelefones() {
-		return telefones;
-	}
-
-	public void setTelefones(List<Telefone> telefones) {
-		this.telefones = telefones;
-	}
-
-	 
-	
-
 	public List<Menu> getMenu() {
 		return menu;
 	}
@@ -180,6 +167,22 @@ public class Usuario {
 
 	public void setSenha(String senha) {
 		this.senha = senha;
+	}
+
+	public String getTelefoneCelular() {
+		return telefoneCelular;
+	}
+
+	public void setTelefoneCelular(String telefoneCelular) {
+		this.telefoneCelular = telefoneCelular;
+	}
+
+	public String getTelefoneResidencial() {
+		return telefoneResidencial;
+	}
+
+	public void setTelefoneResidencial(String telefoneResidencial) {
+		this.telefoneResidencial = telefoneResidencial;
 	}
 
 }
