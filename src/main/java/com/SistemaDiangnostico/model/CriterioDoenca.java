@@ -1,29 +1,24 @@
 package com.SistemaDiangnostico.model;
 
+import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
-import javax.persistence.Id;
 import javax.persistence.Table;
 
+ 
 @Entity
 @Table(name="Criterio_Doenca")
 public class CriterioDoenca {
 	
-	@Id
-	private Long idCriterio;
-	
-	private Long idDoenca;
-	
-	public Long getIdCriterio() {
-		return idCriterio;
-	}
-	public void setIdCriterio(Long idCriterio) {
-		this.idCriterio = idCriterio;
-	}
-	public Long getIdDoenca() {
-		return idDoenca;
-	}
-	public void setIdDoenca(Long idDoenca) {
-		this.idDoenca = idDoenca;
+  
+	@EmbeddedId
+	private CriterioDoencaId id;
+
+	public CriterioDoencaId getId() {
+		return id;
 	}
 
+	public void setId(CriterioDoencaId id) {
+		this.id = id;
+	}
+	
 }
