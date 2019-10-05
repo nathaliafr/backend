@@ -1,10 +1,16 @@
 package com.SistemaDiangnostico.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.SistemaDiangnostico.dto.DoencaDto;
+import com.SistemaDiangnostico.dto.PerguntaDto;
+import com.SistemaDiangnostico.dto.RespostaDto;
+import com.SistemaDiangnostico.model.Doenca;
+import com.SistemaDiangnostico.model.Pergunta;
 import com.SistemaDiangnostico.model.Resposta;
 import com.SistemaDiangnostico.repositorio.RespostaRepositorio;
 
@@ -33,6 +39,17 @@ public class RespostaService {
 	
 	public Resposta criarResposta(Resposta resposta) {
 		return respostaRepositorio.save(resposta);
+	}
+	
+	public List<RespostaDto> buscarTodasRespostas() {
+		List<Resposta> findAll = respostaRepositorio.findAll();
+		
+		ArrayList<RespostaDto> respostas = new ArrayList<RespostaDto>();
+		for (Resposta resp : findAll) {
+			RespostaDto respostaDtos = new RespostaDto(resp);
+			respostas.add(respostaDtos);
+		}
+		return respostas;
 	}
 
 }
