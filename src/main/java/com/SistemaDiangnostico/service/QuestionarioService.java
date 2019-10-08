@@ -1,5 +1,7 @@
 package com.SistemaDiangnostico.service;
 
+import java.text.DecimalFormat;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -11,6 +13,7 @@ import org.springframework.stereotype.Service;
 
 import com.SistemaDiangnostico.dto.DoencaDto;
 import com.SistemaDiangnostico.dto.GraficoResultadoDto;
+import com.SistemaDiangnostico.dto.QuestionarioDto;
 import com.SistemaDiangnostico.dto.ResponderPerguntaRequest;
 import com.SistemaDiangnostico.dto.ValorDePorcentagemDoenca;
 import com.SistemaDiangnostico.model.Crianca;
@@ -26,6 +29,7 @@ import com.SistemaDiangnostico.repositorio.QuestionarioRepositorio;
 
 @Service
 public class QuestionarioService {
+	private static final int CRITERIO_DE_INDECISAO = 20;
 	@Autowired
 	private QuestionarioRepositorio questionarioRepositorio;
 	@Autowired
@@ -41,6 +45,21 @@ public class QuestionarioService {
 
 	public Questionario buscarQuestionarioPorId(Long idQuestionario) {
 		return questionarioRepositorio.findById(idQuestionario).get();
+	}
+
+	public List<QuestionarioDto> buscarQuestionarioPorIdQuestionarioEIdCrianca(Long idCrianca) {
+		Crianca crianca = criancaService.buscarCriancaPorId(idCrianca);
+		
+		List<Questionario> questionarios = questionarioRepositorio.findByCriança(crianca);
+		List<QuestionarioDto> questionariosDto =  new ArrayList<>();
+		
+		for (Questionario questionarioDto : questionarios) {
+			
+			questionariosDto.add(new QuestionarioDto(questionarioDto));
+		}
+		
+		
+		return  questionariosDto;
 	}
 
 	public List<Questionario> buscarTodosQuestionario() {
@@ -60,11 +79,12 @@ public class QuestionarioService {
 		return questionarioRepositorio.save(questionario);
 	}
 
-	public GraficoResultadoDto  responderPerguntaRequest(Long idCrianca,
+	public GraficoResultadoDto responderPerguntaRequest(Long idCrianca,
 			List<ResponderPerguntaRequest> responderPerguntaRequestList) {
 		Questionario questionario = new Questionario();
 		Crianca crianca = criancaService.buscarCriancaPorId(idCrianca);
 		questionario.setCriança(crianca);
+		questionario.setData(LocalDateTime.now());
 		questionario = questionarioRepositorio.save(questionario);
 
 		for (ResponderPerguntaRequest responderPerguntaRequest : responderPerguntaRequestList) {
@@ -78,28 +98,43 @@ public class QuestionarioService {
 			diagnosticoRepositorio.save(diagnostico);
 		}
 
-		List<ValorDePorcentagemDoenca> analisarDoenca = analisarDoenca(questionario.getIdQuestionario(), responderPerguntaRequestList.size());
-		GraficoResultadoDto graficoResultadoDto =  new GraficoResultadoDto();
+		List<ValorDePorcentagemDoenca> analisarDoenca = analisarDoenca(questionario.getIdQuestionario(),
+				responderPerguntaRequestList.size());
+		GraficoResultadoDto graficoResultadoDto = new GraficoResultadoDto();
 		graficoResultadoDto.setGraficoDados(analisarDoenca);
 		return graficoResultadoDto;
 	}
 
+	public GraficoResultadoDto getGrafico(Long idQuestionario){
+		List<Diagnostico> diagnosticos = diagnosticoRepositorio.findByIdQuestionario(idQuestionario);
+		List<ValorDePorcentagemDoenca> analisarDoenca = analisarDoenca(idQuestionario, diagnosticos.size());
+		GraficoResultadoDto graficoResultadoDto = new GraficoResultadoDto();
+		graficoResultadoDto.setGraficoDados(analisarDoenca);
+		return graficoResultadoDto;
+	}
+	
+	
 	private List<ValorDePorcentagemDoenca> analisarDoenca(Long idQuestionario, int totalDePerguntasRespondidas) {
 		List<Diagnostico> diagnosticos = diagnosticoRepositorio.findByIdQuestionario(idQuestionario);
 
 		Map<Long, Long> contador = new HashMap<>();
 		for (Diagnostico diagnostico : diagnosticos) {
 			Resposta resposta = diagnostico.getResposta();
+
 			Criterio criterio = resposta.getCriterio();
 			List<Doenca> doencas = criterio.getDoenca();
-			if (doencas.size() > 1) {
-				Pergunta pergunta = diagnostico.getPergunta();
-				Doenca doenca = pergunta.getDoenca();
-				cadastrarPergunta(doenca, contador);
-			} else {
-				Doenca doenca = doencas.stream().findFirst().get();
-				cadastrarPergunta(doenca, contador);
+			if (criterio.getIdCriterio() != CRITERIO_DE_INDECISAO) {
+				if (doencas.size() > 1) {
+					Pergunta pergunta = diagnostico.getPergunta();
+					Doenca doenca = pergunta.getDoenca();
+					cadastrarPergunta(doenca, contador);
+				} else {
+					Doenca doenca = doencas.stream().findFirst().get();
+					cadastrarPergunta(doenca, contador);
 
+				}
+			} else {
+				totalDePerguntasRespondidas--;
 			}
 
 		}
@@ -116,9 +151,10 @@ public class QuestionarioService {
 		for (Long idDoenca : IdsDoencas) {
 			Optional<Doenca> doenca = doencaRepositorio.findById(idDoenca);
 			ValorDePorcentagemDoenca valorDePorcentagemDoença = new ValorDePorcentagemDoenca();
-			valorDePorcentagemDoença.setDoenca(new DoencaDto( doenca.get()));
-			Double porcentagem = (double) ((contador.get(idDoenca) * 100) / totalDePerguntasRespondidas);
-			valorDePorcentagemDoença.setPorcentagem(porcentagem);
+			valorDePorcentagemDoença.setDoenca(new DoencaDto(doenca.get()));
+			Double porcentagem = (double) ((contador.get(idDoenca) * 100) / (double) totalDePerguntasRespondidas);
+			String format = new DecimalFormat("0.000").format(porcentagem).replace(",", ".");
+			valorDePorcentagemDoença.setPorcentagem(Double.valueOf(format));
 			valorDePorcentagemDoenças.add(valorDePorcentagemDoença);
 
 		}

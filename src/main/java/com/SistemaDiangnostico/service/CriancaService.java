@@ -15,9 +15,18 @@ public class CriancaService {
 	private CriancaRepositorio criancaRepositorio;
 
 	public Crianca buscarCriancaPorId(Long idCrianca) {
+		
 		return criancaRepositorio.findById(idCrianca).get();
 	}
-
+	
+	public List<Crianca> buscarCriancaPorIdUsuario(Long idCrianca) {
+		
+		return criancaRepositorio.findByIdUsuario(idCrianca);
+	}
+	
+	
+	
+	
 	public List<Crianca> buscarTodasCrianca() {
 		return criancaRepositorio.findAll();
 	}

@@ -1,7 +1,9 @@
 package com.SistemaDiangnostico.model;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -21,6 +23,9 @@ public class Questionario {
 	@OneToOne
 	@JoinColumn(name = "idCrianca")
 	private Crianca criança;
+	
+	@Column
+	private LocalDateTime data;
 	
 	@OneToMany
 	@JoinColumn(name = "idQuestionario")
@@ -48,6 +53,14 @@ public class Questionario {
 
 	public void setDiagnostico(List<Diagnostico> diagnostico) {
 		this.diagnostico = diagnostico;
+	}
+ 
+	public LocalDateTime getData() {
+		return data;
+	}
+
+	public void setData(LocalDateTime data) {
+		this.data = data;
 	}
 
 	 

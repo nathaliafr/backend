@@ -29,12 +29,15 @@ public class CriancaController {
 	public @ResponseBody Crianca getCriancaPorId(@PathVariable Long id) {
 		return criancaService.buscarCriancaPorId(id);
 	}
+	
+	@GetMapping("/buscarPorUsuario/{idUsuario}")
+	public @ResponseBody List<Crianca> getCriancaPorIdResponsavel(@PathVariable Long idUsuario) {
+		return criancaService.buscarCriancaPorIdUsuario(idUsuario);
+	}
 
 	@GetMapping("/")
 	public @ResponseBody List<Crianca> getTodasCrianca() {
-
 		List<Crianca> buscarTodasCrianca = criancaService.buscarTodasCrianca();
-
 		return buscarTodasCrianca;
 	}
 
@@ -53,4 +56,7 @@ public class CriancaController {
 	public @ResponseBody Crianca criarCrianca(@RequestBody Crianca crianca) {
 		return criancaService.criarCrianca(crianca);
 	}
+	
+	
+	
 }

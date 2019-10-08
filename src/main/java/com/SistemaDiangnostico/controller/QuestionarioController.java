@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.SistemaDiangnostico.dto.GraficoResultadoDto;
+import com.SistemaDiangnostico.dto.QuestionarioDto;
 import com.SistemaDiangnostico.dto.ResponderPerguntaRequestList;
 import com.SistemaDiangnostico.model.Questionario;
 import com.SistemaDiangnostico.service.QuestionarioService;
@@ -32,6 +33,18 @@ public class QuestionarioController {
 		return questionarioService.buscarQuestionarioPorId(id);
 	}
 	
+	@GetMapping ("/grafico/{idQuestionario}")
+	public @ResponseBody GraficoResultadoDto getGraficoDiangnostivoPorId (@PathVariable Long idQuestionario) {
+		return questionarioService.getGrafico(idQuestionario);
+	}
+	
+	@GetMapping ("/crianca/{idCrianca}")
+	public @ResponseBody List<QuestionarioDto> buscarQuestionarioPorIdQuestionarioEIdCrianca (@PathVariable Long idCrianca) {
+		return questionarioService.buscarQuestionarioPorIdQuestionarioEIdCrianca(idCrianca);
+	}
+	
+	
+	
 	@GetMapping("/")
 	public @ResponseBody List<Questionario> getTodosQuestionario () {
 		
@@ -39,6 +52,9 @@ public class QuestionarioController {
 		 
 		return buscarTodosQuestionario;
 	}
+	
+	
+	
 	
 	@DeleteMapping ("/{id}")
 	public @ResponseBody boolean deletarQuestionario(@PathVariable Long id) {
@@ -56,6 +72,9 @@ public class QuestionarioController {
 		GraficoResultadoDto graficoResultadoDto = questionarioService.responderPerguntaRequest(responderPerguntaRequest.getCriancaId() , responderPerguntaRequest.getResponderPerguntaRequestList());
  		return graficoResultadoDto;
 	}
+	
+	
+	
 	
 	@PutMapping
 	public @ResponseBody Questionario criarQuestionario(@RequestBody Questionario questionario) {
