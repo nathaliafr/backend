@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.SistemaDiangnostico.dto.RespostaDto;
 import com.SistemaDiangnostico.model.Resposta;
 import com.SistemaDiangnostico.service.RespostaService;
 
@@ -30,10 +31,16 @@ public class RespostaController {
 		return respostaService.buscarRespostaPorId(id);
 	}
 	
+	/*
+	 * @GetMapping("/") public @ResponseBody List<RespostaDto> getTodasResposta(){
+	 * List<RespostaDto> buscarTodasResposta =
+	 * respostaService.buscarTodasResposta(); return buscarTodasResposta; }
+	 */
+	
 	@GetMapping("/")
-	public @ResponseBody List<Resposta> getTodasResposta(){
-		List<Resposta> buscarTodasResposta = respostaService.buscarTodasResposta();
-		return buscarTodasResposta;
+	public @ResponseBody List<RespostaDto> getTodasResposta(){
+		List<RespostaDto> buscarTodasRespostas = respostaService.buscarTodasRespostas();
+		return buscarTodasRespostas;
 	}
 	
 	@DeleteMapping
