@@ -31,6 +31,20 @@ public class Questionario {
 	@JoinColumn(name = "idQuestionario")
 	private List<Diagnostico> diagnostico;
 	
+	@OneToOne
+	@JoinColumn(name = "idDoenca")
+	private Doenca doenca;
+
+	
+	
+	public Doenca getDoenca() {
+		return doenca;
+	}
+
+	public void setDoenca(Doenca doenca) {
+		this.doenca = doenca;
+	}
+
 	public Crianca getCriança() {
 		return criança;
 	}

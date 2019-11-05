@@ -15,6 +15,7 @@ import com.SistemaDiangnostico.dto.DoencaDto;
 import com.SistemaDiangnostico.dto.GraficoResultadoDto;
 import com.SistemaDiangnostico.dto.QuestionarioDto;
 import com.SistemaDiangnostico.dto.ResponderPerguntaRequest;
+import com.SistemaDiangnostico.dto.RespostaEspecialistaDTO;
 import com.SistemaDiangnostico.dto.ValorDePorcentagemDoenca;
 import com.SistemaDiangnostico.model.Crianca;
 import com.SistemaDiangnostico.model.Criterio;
@@ -23,9 +24,11 @@ import com.SistemaDiangnostico.model.Doenca;
 import com.SistemaDiangnostico.model.Pergunta;
 import com.SistemaDiangnostico.model.Questionario;
 import com.SistemaDiangnostico.model.Resposta;
+import com.SistemaDiangnostico.model.TaxaDeAcertos;
 import com.SistemaDiangnostico.repositorio.DiagnosticoRepositorio;
 import com.SistemaDiangnostico.repositorio.DoencaRepositorio;
 import com.SistemaDiangnostico.repositorio.QuestionarioRepositorio;
+import com.SistemaDiangnostico.repositorio.TaxaDeAcertosRepositorio;
 
 @Service
 public class QuestionarioService {
@@ -42,6 +45,8 @@ public class QuestionarioService {
 	private DoencaRepositorio doencaRepositorio;
 	@Autowired
 	private DiagnosticoRepositorio diagnosticoRepositorio;
+	@Autowired
+	private TaxaDeAcertosRepositorio taxaDeAcertosRepositorio;
 
 	public Questionario buscarQuestionarioPorId(Long idQuestionario) {
 		return questionarioRepositorio.findById(idQuestionario).get();
@@ -49,17 +54,16 @@ public class QuestionarioService {
 
 	public List<QuestionarioDto> buscarQuestionarioPorIdQuestionarioEIdCrianca(Long idCrianca) {
 		Crianca crianca = criancaService.buscarCriancaPorId(idCrianca);
-		
+
 		List<Questionario> questionarios = questionarioRepositorio.findByCriança(crianca);
-		List<QuestionarioDto> questionariosDto =  new ArrayList<>();
-		
+		List<QuestionarioDto> questionariosDto = new ArrayList<>();
+
 		for (Questionario questionarioDto : questionarios) {
-			
+
 			questionariosDto.add(new QuestionarioDto(questionarioDto));
 		}
-		
-		
-		return  questionariosDto;
+
+		return questionariosDto;
 	}
 
 	public List<Questionario> buscarTodosQuestionario() {
@@ -73,6 +77,68 @@ public class QuestionarioService {
 	public Questionario editarQuestionario(Long idQuestionario, Questionario questionario) {
 		questionario.setIdQuestionario(idQuestionario);
 		return questionarioRepositorio.save(questionario);
+	}
+
+	public Map<String, String> respostaDoEspecialista(RespostaEspecialistaDTO req) {
+		Map<String, String> map = new HashMap<>();
+		map.put("resultado", "ok");
+		if (req.getIdDoenca() != null) {
+			Doenca doenca = doencaRepositorio.findById(req.getIdDoenca()).get();
+			Questionario questionario = questionarioRepositorio.findById(req.getIdQuestionario()).get();
+
+			GraficoResultadoDto grafico = getGrafico(req.getIdQuestionario());
+			ValorDePorcentagemDoenca maiorValor = procurarMaiorValor(grafico);
+			alterarTaxaDeErro(doenca, questionario, maiorValor);
+
+			questionario.setDoenca(doenca);
+			questionarioRepositorio.save(questionario);
+
+			return map;
+		} else {
+			return map;
+
+		}
+
+	}
+
+	private void alterarTaxaDeErro(Doenca doenca, Questionario questionario, ValorDePorcentagemDoenca maiorValor) {
+
+		TaxaDeAcertos taxaDeAcertos = taxaDeAcertosRepositorio.findById(1L).get();
+		if (questionario.getDoenca() == null && doenca.getNome().equals(maiorValor.getDoenca().getNome())) {
+			taxaDeAcertos.setAcertos(taxaDeAcertos.getAcertos() + 1);
+			
+		} else if (questionario.getDoenca() == null && !doenca.getNome().equals(maiorValor.getDoenca().getNome())) {
+			taxaDeAcertos.setErros(taxaDeAcertos.getErros() + 1);
+			
+		} else if (questionario.getDoenca() != null
+				&& !questionario.getDoenca().getNome().equals(doenca.getNome())
+				&& doenca.getNome().equals(maiorValor.getDoenca().getNome())) {
+			
+			taxaDeAcertos.setErros(taxaDeAcertos.getErros() - 1);
+			taxaDeAcertos.setAcertos(taxaDeAcertos.getAcertos() + 1);
+		} else if (questionario.getDoenca() != null
+				&& !questionario.getDoenca().getNome().equals(doenca.getNome())
+				&& !doenca.getNome().equals(maiorValor.getDoenca().getNome())) {
+			
+			taxaDeAcertos.setErros(taxaDeAcertos.getErros() + 1);
+			taxaDeAcertos.setAcertos(taxaDeAcertos.getAcertos() - 1);
+		}
+
+		taxaDeAcertosRepositorio.save(taxaDeAcertos);
+	}
+
+	private ValorDePorcentagemDoenca procurarMaiorValor(GraficoResultadoDto grafico) {
+		List<ValorDePorcentagemDoenca> graficoDados = grafico.getGraficoDados();
+		ValorDePorcentagemDoenca doencaComMaiorRelevancia = new ValorDePorcentagemDoenca();
+		double maiorValor = 0;
+		for (ValorDePorcentagemDoenca valorDePorcentagemDoenca : graficoDados) {
+			if (maiorValor < valorDePorcentagemDoenca.getPorcentagem()) {
+				maiorValor = valorDePorcentagemDoenca.getPorcentagem();
+				doencaComMaiorRelevancia = valorDePorcentagemDoenca;
+			}
+		}
+
+		return doencaComMaiorRelevancia;
 	}
 
 	public Questionario criarQuestionario(Questionario questionario) {
@@ -105,15 +171,21 @@ public class QuestionarioService {
 		return graficoResultadoDto;
 	}
 
-	public GraficoResultadoDto getGrafico(Long idQuestionario){
+	public GraficoResultadoDto getGrafico(Long idQuestionario) {
 		List<Diagnostico> diagnosticos = diagnosticoRepositorio.findByIdQuestionario(idQuestionario);
 		List<ValorDePorcentagemDoenca> analisarDoenca = analisarDoenca(idQuestionario, diagnosticos.size());
 		GraficoResultadoDto graficoResultadoDto = new GraficoResultadoDto();
 		graficoResultadoDto.setGraficoDados(analisarDoenca);
+		String taxaDeErro = calcularTaxaDeErro();
+		graficoResultadoDto.setTaxaDeConfianca(taxaDeErro);
 		return graficoResultadoDto;
 	}
-	
-	
+
+	private String calcularTaxaDeErro() {
+		TaxaDeAcertos taxa = taxaDeAcertosRepositorio.findById(1L).get();
+		return String.format("%.2f ", (double) ((taxa.getErros() * 100) / (taxa.getAcertos() + taxa.getErros()))) + "%";
+	}
+
 	private List<ValorDePorcentagemDoenca> analisarDoenca(Long idQuestionario, int totalDePerguntasRespondidas) {
 		List<Diagnostico> diagnosticos = diagnosticoRepositorio.findByIdQuestionario(idQuestionario);
 

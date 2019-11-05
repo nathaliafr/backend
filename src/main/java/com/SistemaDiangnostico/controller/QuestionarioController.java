@@ -1,8 +1,10 @@
 package com.SistemaDiangnostico.controller;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -17,6 +19,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.SistemaDiangnostico.dto.GraficoResultadoDto;
 import com.SistemaDiangnostico.dto.QuestionarioDto;
 import com.SistemaDiangnostico.dto.ResponderPerguntaRequestList;
+import com.SistemaDiangnostico.dto.RespostaEspecialistaDTO;
 import com.SistemaDiangnostico.model.Questionario;
 import com.SistemaDiangnostico.service.QuestionarioService;
 
@@ -62,8 +65,16 @@ public class QuestionarioController {
 		return true;
 	}
 	
+	
+
+	@PostMapping("/respostaDoEscialista")
+	public @ResponseBody ResponseEntity<Map<String, String>> editarQuestionario(@RequestBody RespostaEspecialistaDTO req) {
+		return ResponseEntity.ok().body(questionarioService.respostaDoEspecialista(req));
+	}
+	
+	
 	@PostMapping
-	public @ResponseBody Questionario editarQuestionario(@RequestBody Questionario questionario) {
+	public @ResponseBody Questionario respostaEspecialista(@RequestBody Questionario questionario) {
 		return questionarioService.editarQuestionario(questionario.getIdQuestionario(), questionario);
 	}
 	

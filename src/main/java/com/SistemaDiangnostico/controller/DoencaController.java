@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.SistemaDiangnostico.dto.DoencaDto;
-import com.SistemaDiangnostico.dto.PerguntaDto;
 import com.SistemaDiangnostico.service.DoencaService;
 
 @Controller
@@ -22,9 +21,16 @@ public class DoencaController {
 	private DoencaService doencaService;
 	
 	@GetMapping("/")
-	public @ResponseBody List<DoencaDto> getTodasDoencas() {
-		List<DoencaDto> buscarTodasDoencas = doencaService.buscarTodasDoencas();
+	public @ResponseBody List<DoencaDto> buscarTodasDoencasMenosSaudavel() {
+		List<DoencaDto> buscarTodasDoencas = doencaService.buscarTodasDoencasMenosSaudavel();
 		return buscarTodasDoencas;
 	}
 
+	
+	
+	@GetMapping("/todas")
+	public @ResponseBody List<DoencaDto> getTodasDoencas() {
+		List<DoencaDto> buscarTodasDoencas = doencaService.getTodasDoencas();
+		return buscarTodasDoencas;
+	}
 }

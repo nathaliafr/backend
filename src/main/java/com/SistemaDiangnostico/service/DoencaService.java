@@ -19,7 +19,7 @@ public class DoencaService {
 		return doencaRepositorio.findById(doencaId).get();
 	}
 
-	public List<DoencaDto> buscarTodasDoencas() {
+	public List<DoencaDto> buscarTodasDoencasMenosSaudavel() {
 		List<Doenca> list = doencaRepositorio.findByNomeNot("Saudavel");
 		
 		ArrayList<DoencaDto> doencas = new ArrayList<DoencaDto>();
@@ -29,5 +29,16 @@ public class DoencaService {
 		}
 		return doencas;
 	}
+	public List<DoencaDto> getTodasDoencas() {
+		List<Doenca> list = doencaRepositorio.findAll();
+		
+		ArrayList<DoencaDto> doencas = new ArrayList<DoencaDto>();
+		for (Doenca doenca : list) {
+			DoencaDto doencaDto = new DoencaDto(doenca);
+			doencas.add(doencaDto);
+		}
+		return doencas;
+	}
+
 
 }

@@ -32,6 +32,8 @@ public class Usuario {
 	private String senha;
 	private String telefoneResidencial;
 	private String telefoneCelular;
+	private String tipo;
+	
  	
 	@OneToMany
 	@JoinColumn(name = "idUsuario")
@@ -183,6 +185,14 @@ public class Usuario {
 
 	public void setTelefoneResidencial(String telefoneResidencial) {
 		this.telefoneResidencial = telefoneResidencial;
+	}
+
+	public String getTipo() {
+		return tipo;
+	}
+
+	public void setTipo(String tipo) {
+		this.tipo = tipo;
 	}
 
 }

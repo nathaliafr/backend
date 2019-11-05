@@ -15,12 +15,14 @@ public class QuestionarioDto {
 	private CriancaDto criança;
 
 	private LocalDateTime data;
+	private String doenca;
 
 	private List<DiagnosticoDto> diagnostico;
 
 	public QuestionarioDto(Questionario questionario) {
 		this.idQuestionario = questionario.getIdQuestionario();
 		this.data = questionario.getData();
+		this.doenca = questionario.getDoenca().getNome();
 		this.setCriança(new CriancaDto(questionario.getCriança()));
 		this.setDiagnostico(parseDtoDiaguinostivo(questionario.getDiagnostico()));
 	}
@@ -64,6 +66,14 @@ public class QuestionarioDto {
 
 	public void setDiagnostico(List<DiagnosticoDto> diagnostico) {
 		this.diagnostico = diagnostico;
+	}
+
+	public String getDoenca() {
+		return doenca;
+	}
+
+	public void setDoenca(String doenca) {
+		this.doenca = doenca;
 	}
 
 }

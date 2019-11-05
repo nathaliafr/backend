@@ -12,6 +12,7 @@ public class GraficoResultadoDto implements Serializable{
 	private List<ValorDePorcentagemDoenca> graficoDados;
 	private List<String> labels;
 	private List<Double> data;
+	private String taxaDeConfianca;
 	
 	 
 
@@ -44,6 +45,14 @@ public class GraficoResultadoDto implements Serializable{
 
 	public void setData(List<Double> data) {
 		this.data = data;
+	}
+
+	public String getTaxaDeConfianca() {
+		return taxaDeConfianca;
+	}
+
+	public void setTaxaDeConfianca(String taxaDeConfianca) {
+		this.taxaDeConfianca = taxaDeConfianca;
 	}
 	
 	
